@@ -1,6 +1,6 @@
 <?php
 
-$app->post('/users/check_session', function() use ($app) {
+$app->post('/users/check_session/:type', function($type) use ($app) {
   $post = json_decode($app->request->getBody());
   if(isset($post->username,$post->password,$post->level)){
     $pdo = getConnection();
@@ -14,7 +14,12 @@ $app->post('/users/check_session', function() use ($app) {
     $login = $sq->fetchColumn();
     //selection de l'utilisateur
     if ($login == 1) {
-         echo '{"message":"ok"}';
+        if($type <= $post->level){
+          echo '{"message":"ok"}';
+        } else {
+          $app->response->setStatus(300);
+          echo '{"message":"error"}';
+        }
      } else {
           $app->response->setStatus(300);
           echo '{"message":"error"}';

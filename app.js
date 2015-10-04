@@ -4,7 +4,7 @@ angular.module('ShinixCMS', ['ngRoute','flash','ngAnimate','angularLoad','angula
     $routeProvider.
       when('/about', {
         templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
+        controller: 'AboutCtrl',
       }).
       otherwise({
         redirectTo: '/blog'

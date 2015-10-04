@@ -16,23 +16,27 @@ function($routeProvider) {
   		}).
   		when('/users/index', {
   			templateUrl: 'views/users/index.html',
-  			controller: 'UsersCtrl'
+  			controller: 'UsersCtrl',
+				resolve:{
+						"check":function($location,Flash,$sessionStorage,$http){
+									if($sessionStorage.users){
+										$http({method: 'POST',url: '/api/users/check_session/2',data: $sessionStorage.users
+										}).then(function successCallback() {
+										}, function errorCallback() {
+											$location.path('/blog');
+											Flash.create('error', "accès refusé",'alert-danger');
+										});
+									} else{
+										$location.path('/blog');
+										Flash.create('error', "accès refusé",'alert-danger');
+									}
+						}
+				}
   		});
 }])
 .controller('UsersCtrl', function UsersCtrl($scope,$http,$sessionStorage,$window,Flash) {
-  $http({
-    method: 'POST',
-    url: '/api/users/check_session',
-    data: $sessionStorage.users
-  }).then(function successCallback(r) {
     //ok
     console.log('hi ho');
-  }, function errorCallback(r) {
-      var message = '<strong>Erreur !</strong> Le nom d\'utilisateur ou le mot de passe est incorrect.';
-      Flash.create('error', message,'alert-danger');
-      delete $sessionStorage.users;
-      $window.location.href = '#/users/login';
-  });
 })
 .controller('UsersRegisterCtrl', function UsersRegisterCtrl($scope,$http,Flash,$window) {
   $scope.SubmitForm = function(isValid){
