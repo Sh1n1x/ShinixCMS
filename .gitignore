@@ -1,2 +1,4 @@
 vendor
 uploads/blog/
+composer.lock
+composer.phar
