@@ -1,7 +1,7 @@
 <h1>Editer</h1>
 <input type="file" nv-file-select="{ disabled: true }" uploader="uploader"/><br/>
 <div class="block-img">
-  <div ng-repeat="img in image" style=" display:inline;"><img src="uploads/{{img.file}}" style="max-width:100px;" /></div>
+  <div ng-repeat="img in image" style=" display:inline;"><img ng-src="uploads/{{img.file}}" style="max-width:100px;" /></div>
 </div>
 <form name="article_edit" ng-submit="SubmitForm()">
   <div class="form-group">

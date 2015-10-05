@@ -11,9 +11,9 @@ angular.module('ShinixCMS', ['ngRoute','flash','ngAnimate','angularLoad','angula
       });
   }])
   .filter('to_trusted', ['$sce', function($sce){
-        return function(text) {
-            return $sce.trustAsHtml(text);
-        };
+	return function(text) {
+		return $sce.trustAsHtml(text);
+	};
   }])
   .factory('$localstorage', ['$window', function($window) {
     return {
@@ -87,4 +87,4 @@ angular.module('ShinixCMS', ['ngRoute','flash','ngAnimate','angularLoad','angula
             });
         }
     }
-}]);
+}])
