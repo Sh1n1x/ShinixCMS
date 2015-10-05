@@ -13,7 +13,7 @@
       <a class="navbar-brand" href="#!/"><?=TITLE ?></a>
       <ul class="nav nav-pills">
         <li class="nav-item active">
-          <a class="nav-link" href="#!/home">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="#!/blog">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#!/about">About</a>
@@ -47,7 +47,7 @@
 		<script src="<?=url() ?>/app.js"></script>
 		<script src="<?=url() ?>/controllers/BlogCtrl.js"></script>
 		<script src="<?=url() ?>/controllers/UsersCtrl.js"></script>
-		<script src="<?=url() ?>/controllers/AboutCtrl.js"></script>
+		<script src="<?=url() ?>/controllers/PagesCtrl.js"></script>
 		<script>
 			angular.module('ShinixCMS')
 				.constant("CMSCONFIG", {

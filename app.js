@@ -4,13 +4,17 @@ angular.module('ShinixCMS', ['ngRoute','flash','ngAnimate','angularLoad','angula
 	$locationProvider.html5Mode(false);
     $locationProvider.hashPrefix("!");
     $routeProvider.
-      when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-      }).
-      otherwise({
-        redirectTo: '/blog'
-      });
+		when('/', {
+			templateUrl: 'views/blog/blog.html',
+			controller: 'BlogCtrl'
+		}).
+		when('/404', {
+			templateUrl: 'views/404.html',
+			controller: 'Four04Ctrl'
+		}).
+		otherwise({
+			redirectTo: '/404'
+		});
   }])
   .filter('to_trusted', ['$sce', function($sce){
 	return function(text) {
@@ -92,4 +96,6 @@ angular.module('ShinixCMS', ['ngRoute','flash','ngAnimate','angularLoad','angula
 }])
 .run(function(amMoment,CMSCONFIG) {
     amMoment.changeLocale(CMSCONFIG.language);
+})
+.controller('Four04Ctrl', function() {
 });
