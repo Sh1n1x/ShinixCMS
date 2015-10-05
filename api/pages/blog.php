@@ -1,14 +1,23 @@
 <?php
-$app->get('/blog/:size_img', function($size_img) use($parser,$ImageManager) {
+$app->get('/blog/:size_img/:page', function($size_img,$page) use($parser,$ImageManager) {
 	$pdo = getConnection();
+	$page = (isset($page) && $page > 0) ? $page : 1;
+	$limit_per_page = 2;
+	$offset = (--$page) * $limit_per_page;
 	$size_img2 = explode('x',$size_img);
-	$selectStatement = $pdo->select(['B.id,B.title,B.content,B.created,M.file,M.name'])
-						 ->from('an_blog as B')
-						 ->leftJoin('an_medias as M', 'B.img_id', '=', 'M.id')
-						 ->where('B.online','=',1)
-						 ->orderBy('B.created','DESC');
+	$selectStatement = $pdo->select(['B.id,B.title,B.content,B.created,B.slug,M.file,M.name'])
+						   ->from('an_blog as B')
+						   ->leftJoin('an_medias as M', 'B.img_id', '=', 'M.id')
+						   ->where('B.online','=',1)
+						   ->orderBy('B.created','DESC')
+						   ->limit($limit_per_page)
+						   ->offset($offset);
 	$stmt = $selectStatement->execute();
 	$data = $stmt->fetchAll(PDO::FETCH_CLASS);
+	
+	$result = $pdo->prepare("SELECT count(*) FROM an_blog WHERE online = 1"); 
+	$result->execute(); 
+	$nb_item = $result->fetchColumn(); 
   foreach($data as $v){
   if(file_exists('../uploads/'.$v->file) && is_array($size_img2) && is_numeric($size_img2[0]) && is_numeric($size_img2[1])){
       $name = str_replace($v->name,$v->name.'_'.$size_img,$v->file);
@@ -20,8 +29,7 @@ $app->get('/blog/:size_img', function($size_img) use($parser,$ImageManager) {
     }
     $v->content = strip_tags($parser->defaultTransform($v->content));
   }
-  
- echo json_encode($data);
+ echo '{"data":'.json_encode($data).',"total_item":'.$nb_item.',"total_page":'.ceil($nb_item/$limit_per_page).'}';
 });
 
 $app->get('/blog/article/:slug/:id', function ($slug, $id) use($parser) {

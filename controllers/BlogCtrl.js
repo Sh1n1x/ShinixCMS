@@ -11,6 +11,10 @@ function($routeProvider) {
 			templateUrl: 'views/blog/blog.html',
 			controller: 'BlogCtrl'
 		}).
+		when('/blog/:page', {
+			templateUrl: 'views/blog/blog.html',
+			controller: 'BlogCtrl'
+		}).
 		when('/blog/:slug/:id', {
 			templateUrl: 'views/blog/blog_one.html',
 			controller: 'BlogOneCtrl'
@@ -75,11 +79,22 @@ function($routeProvider) {
 *	BLOG CONTROLLERS
 **/
 
-.controller('BlogCtrl', function BlogCtrl($scope,api) {
+.controller('BlogCtrl', function BlogCtrl($scope,api,$routeParams) {
+	if($routeParams.page){
+		$scope.cpage = $routeParams.page;
+	} else {
+		$scope.cpage = 1;
+	}
 	var img_size = "800x200";
-	api.getAll('api/blog/'+img_size).then(function(response) {
-			$scope.blog_item = response.data;
-	}, function(response) { });
+	$scope.pagination = [];
+	api.getAll('api/blog/'+img_size+'/'+$scope.cpage).then(function(r) {
+		$scope.blog_item = r.data.data;
+		$scope.total_item = r.data.total_item;
+		$scope.total_page = r.data.total_page;
+		for (var i=1; i<$scope.total_page+1; i++) {
+		  $scope.pagination[i] = i;
+		}
+	}, function(r) { });
 })
 .controller('BlogOneCtrl', function BlogOneCtrl($scope,api,$routeParams) {
 		api.getAll('api/blog/article/'+$routeParams.slug+'/'+$routeParams.id).then(function(response) {

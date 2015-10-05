@@ -5,4 +5,6 @@
   <small>créé le {{itm.created | amDateFormat:'MM.DD.YYYY à HH:mm:ss'}}</small>
   <p>{{itm.content}}</p>
 </div>
-{{test}}
+<ul class="pagination">
+	<li ng-repeat="page in pagination" ng-if="page" ng-class="{'active': page == cpage}"><a href="#!/blog/{{page}}">{{page}}</a></li>
+</ul>
