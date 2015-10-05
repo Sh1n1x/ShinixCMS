@@ -120,4 +120,4 @@ CREATE TABLE `an_users` (
 --
 
 INSERT INTO `an_users` (`id`, `username`, `password`, `email`, `level`, `created`) VALUES
-(1, 'admin', '$2y$10$NSJBmPx3uZiAwS2CBL32Jel8LIcB7dRbpEwO3BtdjX.fZnKAQKcSK', 'admin@admin.com', 0, '2015-10-04 14:53:11');
+(1, 'admin', '$2y$10$NSJBmPx3uZiAwS2CBL32Jel8LIcB7dRbpEwO3BtdjX.fZnKAQKcSK', 'admin@admin.com', 9, '2015-10-04 14:53:11');
