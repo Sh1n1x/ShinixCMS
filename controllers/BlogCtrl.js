@@ -24,35 +24,23 @@ function($routeProvider) {
 			controller: 'AdminBlogEditCtrl'
 		});
 }])
-.controller('BlogCtrl', function BlogCtrl($scope,$http) {
-	$http({
-		method: 'GET',
-		url: '/api/blog'
-	}).then(function successCallback(response) {
+.controller('BlogCtrl', function BlogCtrl($scope,api) {
+	api.getAll('api/blog').then(function(response) {
 			$scope.blog_item = response.data;
-	}, function errorCallback(response) {});
+	}, function(response) { });
 })
-.controller('BlogOneCtrl', function BlogOneCtrl($scope,$http,$routeParams) {
-		$http({
-			method: 'GET',
-			url: '/api/blog/article/'+$routeParams.slug+'/'+$routeParams.id
-		}).then(function successCallback(response) {
+.controller('BlogOneCtrl', function BlogOneCtrl($scope,api,$routeParams) {
+		api.getAll('api/blog/article/'+$routeParams.slug+'/'+$routeParams.id).then(function(response) {
 				$scope.itm = response.data;
 		}, function errorCallback(response) {});
 })
-.controller('AdminBlogCtrl', function AdminBlogCtrl($scope,$http) {
-		$http({
-			method: 'GET',
-			url: '/api/blog/admin'
-		}).then(function successCallback(response) {
+.controller('AdminBlogCtrl', function AdminBlogCtrl($scope,api) {
+		api.getAll('api/blog/admin').then(function(response) {
 				$scope.item = response.data;
 		}, function errorCallback(response) {});
 })
-.controller('AdminBlogNewCtrl', function AdminBlogNewCtrl($scope,$http,$window) {
-	$http({
-		method: 'POST',
-		url: '/api//blog/admin/new'
-	}).then(function successCallback(r) {
+.controller('AdminBlogNewCtrl', function AdminBlogNewCtrl($scope,api,$window) {
+	api.getAll('api/blog/admin/new').then(function(r) {
 			$window.location.href = '#/admin/blog/edit/'+r.data.id;
 	});
 })

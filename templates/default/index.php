@@ -3,9 +3,9 @@
 	<head>
 		<meta charset="utf-8">
 		<title><?=TITLE ?></title>
-    <link rel="stylesheet" href="../../vendor/twbs/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../../lib/angular-flash/angular-flash.min.css" />
-    <style>body{font-family:"Helvetica Neue";font-weight:300;}h1,h2{font-weight:300;}</style>
+    <link rel="stylesheet" href="<?=url() ?>vendor/twbs/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="<?=url() ?>lib/angular-flash/angular-flash.min.css" />
+    <style>body{font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;;font-weight:300;}h1,h2{font-weight:300;}</style>
 	</head>
 	<body ng-app="ShinixCMS">
     <nav class="navbar navbar-inverse">
@@ -32,17 +32,23 @@
         <div flash-message="5000" ></div>
 		    <div ng-view="">Chargement</div>
     </div>
-		<script src="vendor/components/angular.js/angular.min.js"></script>
-		<script src="vendor/components/angular.js/angular-route.js"></script>
-		<script src="vendor/components/angular.js/angular-animate.js"></script>
-		<script src="../../lib/angular-flash/angular-flash.min.js"></script>
-		<script src="../../lib/ngStorage/ngStorage.min.js"></script>
-		<script src="../../lib/angular-load/angular-load.min.js"></script>
-		<script src="../../lib/ng-flow/ng-flow-standalone.min.js"></script>
-		<script src="../../lib/angular-validation-match/angular-validation-match.min.js"></script>
-		<script src="app.js"></script>
-		<script src="controllers/BlogCtrl.js"></script>
-		<script src="controllers/UsersCtrl.js"></script>
-		<script src="controllers/AboutCtrl.js"></script>
+		<script src="<?=url() ?>vendor/components/angular.js/angular.min.js"></script>
+		<script src="<?=url() ?>vendor/components/angular.js/angular-route.js"></script>
+		<script src="<?=url() ?>vendor/components/angular.js/angular-animate.js"></script>
+		<script src="<?=url() ?>/lib/angular-flash/angular-flash.min.js"></script>
+		<script src="<?=url() ?>/lib/ngStorage/ngStorage.min.js"></script>
+		<script src="<?=url() ?>/lib/angular-load/angular-load.min.js"></script>
+		<script src="<?=url() ?>/lib/ng-flow/ng-flow-standalone.min.js"></script>
+		<script src="<?=url() ?>/lib/angular-validation-match/angular-validation-match.min.js"></script>
+		<script src="<?=url() ?>/app.js"></script>
+		<script src="<?=url() ?>/controllers/BlogCtrl.js"></script>
+		<script src="<?=url() ?>/controllers/UsersCtrl.js"></script>
+		<script src="<?=url() ?>/controllers/AboutCtrl.js"></script>
+		<script>
+			angular.module('ShinixCMS')
+				.constant("CMSCONFIG", {
+					"url": "<?=url() ?>"
+				});	
+		</script>
 	</body>
 </html>
