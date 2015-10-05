@@ -1,5 +1,9 @@
 
 angular.module('ShinixCMS')
+
+/**
+*	BLOG ROUTING
+**/
 .config(['$routeProvider',
 function($routeProvider) {
 	$routeProvider.
@@ -66,8 +70,14 @@ function($routeProvider) {
 			}
 		});
 }])
+
+/**
+*	BLOG CONTROLLERS
+**/
+
 .controller('BlogCtrl', function BlogCtrl($scope,api) {
-	api.getAll('api/blog').then(function(response) {
+	var img_size = "800x200";
+	api.getAll('api/blog/'+img_size).then(function(response) {
 			$scope.blog_item = response.data;
 	}, function(response) { });
 })

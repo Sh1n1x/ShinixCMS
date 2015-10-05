@@ -1,14 +1,26 @@
 <?php
-$app->get('/blog', function() use($parser) {
-  $pdo = getConnection();
-  $selectStatement = $pdo->select()
-                         ->from('an_blog')
-                         ->where('online','=',1);
-  $stmt = $selectStatement->execute();
-  $data = $stmt->fetchAll(PDO::FETCH_CLASS);
+$app->get('/blog/:size_img', function($size_img) use($parser,$ImageManager) {
+	$pdo = getConnection();
+	$size_img2 = explode('x',$size_img);
+	$selectStatement = $pdo->select(['B.id,B.title,B.content,B.created,M.file,M.name'])
+						 ->from('an_blog as B')
+						 ->leftJoin('an_medias as M', 'B.img_id', '=', 'M.id')
+						 ->where('B.online','=',1)
+						 ->orderBy('B.created','DESC');
+	$stmt = $selectStatement->execute();
+	$data = $stmt->fetchAll(PDO::FETCH_CLASS);
   foreach($data as $v){
+  if(file_exists('../uploads/'.$v->file) && is_array($size_img2) && is_numeric($size_img2[0]) && is_numeric($size_img2[1])){
+      $name = str_replace($v->name,$v->name.'_'.$size_img,$v->file);
+      if(!file_exists('../uploads/'.$name)){
+        $ImageManager->make('../uploads/'.$v->file)->crop($size_img2[0], $size_img2[1])->save('../uploads/'.$name);
+        $filename_from_url = parse_url('../uploads/'.$v->file);
+      }
+      $v->file = $name;
+    }
     $v->content = strip_tags($parser->defaultTransform($v->content));
   }
+  
  echo json_encode($data);
 });
 
@@ -24,7 +36,7 @@ $app->get('/blog/article/:slug/:id', function ($slug, $id) use($parser) {
 
 $app->get('/blog/admin', function () {
   $pdo = getConnection();
-  $sct = $pdo->select(['id,title'])->from('an_blog');
+  $sct = $pdo->select(['id,title,created'])->from('an_blog');
   $stmt = $sct->execute();
   $data = $stmt->fetchAll();
   echo json_encode($data);

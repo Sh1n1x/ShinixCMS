@@ -8,30 +8,35 @@
 	<meta name="fragment" content="!">
     <style>body{font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;;font-weight:300;}h1,h2{font-weight:300;}</style>
 	</head>
-	<body ng-app="ShinixCMS">
-    <nav class="navbar navbar-inverse">
-      <a class="navbar-brand" href="#!/"><?=TITLE ?></a>
-      <ul class="nav nav-pills">
-        <li class="nav-item active">
-          <a class="nav-link" href="#!/blog">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#!/about">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#!/users/register">Inscription</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#!/users/login">Connexion</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#!/admin/blog">Admin blog</a>
-        </li>
-      </ul>
-    </nav>
+	<body ng-app="ShinixCMS">	
     <div class="container">
-        <div flash-message="5000" ></div>
-		    <div ng-view="">Chargement</div>
+		<nav class="navbar navbar-inverse">
+		  <a class="navbar-brand" href="#!/"><?=TITLE ?></a>
+		  <ul class="nav nav-pills">
+			<li class="nav-item active">
+			  <a class="nav-link" href="#!/blog">Home <span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item">
+			  <a class="nav-link" href="#!/about">About</a>
+			</li>
+			<li class="nav-item">
+			  <a class="nav-link" href="#!/users/register">Inscription</a>
+			</li>
+			<li class="nav-item">
+			  <a class="nav-link" href="#!/users/login">Connexion</a>
+			</li>
+			<li class="nav-item">
+			  <a class="nav-link" href="#!/admin/blog">Admin blog</a>
+			</li>
+		  </ul>
+		</nav>
+		<div class="row">
+			<div class="col-md-3">Salut</div>
+			<div class="col-md-9">
+				<div flash-message="5000" ></div>
+				<div ng-view="">Chargement</div>
+			</div>
+		</div>
     </div>
 		<script src="<?=url() ?>vendor/components/angular.js/angular.min.js"></script>
 		<script src="<?=url() ?>vendor/components/angular.js/angular-route.js"></script>

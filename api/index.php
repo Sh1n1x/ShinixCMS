@@ -19,7 +19,7 @@
   * INITIALISATION CONFIGURATION
   **/
 
-  $ImageManager = new ImageManager(array('driver' => 'imagick'));
+  $ImageManager = new ImageManager(array('driver' => 'gd'));
   $parser = new Markdown;
   $app = new \Slim\Slim();
   $app->response->headers->set('Content-Type', 'application/json');

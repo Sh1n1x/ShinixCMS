@@ -4,11 +4,13 @@
 <tr>
   <th>id</th>
   <th>Titre</th>
+  <th>Date de création</th>
   <th>Action</th>
 </tr>
 <tr ng-repeat="itm in item">
   <td>{{itm.id}}</td>
   <td>{{itm.title}}</td>
+  <td>{{itm.created}}</td>
   <td><a href="#!/admin/blog/edit/{{itm.id}}">Editer</a></td>
 </tr>
 </table>

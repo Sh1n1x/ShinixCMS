@@ -1,6 +1,7 @@
 <h1>Blog</h1>
 <div ng-repeat="itm in blog_item">
   <h2><a href="#!/blog/{{itm.slug}}/{{itm.id}}">{{itm.title}}</a></h2>
+  <img ng-src="uploads/{{itm.file}}" ng-if="itm.file" style="width:100%;" />
   <small>créé le {{itm.created | amDateFormat:'MM.DD.YYYY à HH:mm:ss'}}</small>
   <p>{{itm.content}}</p>
 </div>
