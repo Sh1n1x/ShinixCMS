@@ -13,15 +13,57 @@ function($routeProvider) {
 		}).
 		when('/admin/blog', {
 			templateUrl: 'views/blog/admin_list.html',
-			controller: 'AdminBlogCtrl'
+			controller: 'AdminBlogCtrl',
+			resolve:{
+				"check":function($location,Flash,$sessionStorage,api){
+					if($sessionStorage.users){
+						api.post('api/users/check_session/2',$sessionStorage.users).then(function() {
+						}, function errorCallback() {
+							$location.path('/blog');
+							Flash.create('error', "Accès refusé",'alert-danger');
+						});
+					} else{
+						$location.path('/blog');
+						Flash.create('error', "Accès refusé",'alert-danger');
+					}
+				}
+			}
 		}).
 		when('/admin/blog/new', {
 			templateUrl: 'views/empty.html',
-			controller: 'AdminBlogNewCtrl'
+			controller: 'AdminBlogNewCtrl',
+			resolve:{
+				"check":function($location,Flash,$sessionStorage,api){
+					if($sessionStorage.users){
+						api.post('api/users/check_session/2',$sessionStorage.users).then(function() {
+						}, function errorCallback() {
+							$location.path('/blog');
+							Flash.create('error', "Accès refusé",'alert-danger');
+						});
+					} else{
+						$location.path('/blog');
+						Flash.create('error', "Accès refusé",'alert-danger');
+					}
+				}
+			}
 		}).
 		when('/admin/blog/edit/:id', {
 			templateUrl: 'views/blog/admin_edit.html',
-			controller: 'AdminBlogEditCtrl'
+			controller: 'AdminBlogEditCtrl',
+			resolve:{
+				"check":function($location,Flash,$sessionStorage,api){
+					if($sessionStorage.users){
+						api.post('api/users/check_session/2',$sessionStorage.users).then(function() {
+						}, function errorCallback() {
+							$location.path('/blog');
+							Flash.create('error', "accès refusé",'alert-danger');
+						});
+					} else{
+						$location.path('/blog');
+						Flash.create('error', "accès refusé",'alert-danger');
+					}
+				}
+			}
 		});
 }])
 .controller('BlogCtrl', function BlogCtrl($scope,api) {
@@ -41,7 +83,7 @@ function($routeProvider) {
 })
 .controller('AdminBlogNewCtrl', function AdminBlogNewCtrl($scope,api,$window) {
 	api.getAll('api/blog/admin/new').then(function(r) {
-			$window.location.href = '#/admin/blog/edit/'+r.data.id;
+			$window.location.href = '#!/admin/blog/edit/'+r.data.id;
 	});
 })
 .controller('AdminBlogEditCtrl', function AdminBlogEditCtrl($scope,$http,api,$routeParams,$window,Flash,angularLoad,FileUploader,CMSCONFIG) {
@@ -119,7 +161,7 @@ function($routeProvider) {
 			api.post('api/blog/admin/edit/'+$routeParams.id,$scope.blog).then(function(response) {
 				var message = '<strong>Succès !</strong> Article mis à jour avec succès';
 				Flash.create('success', message);
-				$window.location.href = '#/admin/blog';
+				$window.location.href = '#!/admin/blog';
 			}, function errorCallback(response) {});
 		};
 	});
@@ -128,7 +170,7 @@ function($routeProvider) {
 		api.getAll('api/blog/admin/edit/'+$routeParams.id).then(function(response) {
 			$scope.blog = response.data;
 		}, function errorCallback(response) {
-			$window.location.href = '#/admin/blog';
+			$window.location.href = '#!/admin/blog';
 			var message = '<strong>Erreur !</strong> Article introuvable';
 			Flash.create('error', message,'alert-danger');
 		});

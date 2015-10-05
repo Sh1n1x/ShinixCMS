@@ -1,6 +1,8 @@
-angular.module('ShinixCMS', ['ngRoute','flash','ngAnimate','angularLoad','angularFileUpload','validation.match','ngStorage'])
-  .config(['$routeProvider',
-  function($routeProvider) {
+angular.module('ShinixCMS', ['ngRoute','flash','ngAnimate','angularLoad','angularFileUpload','validation.match','ngStorage','angularMoment'])
+  .config(['$routeProvider','$locationProvider',
+  function($routeProvider,$locationProvider) {
+	$locationProvider.html5Mode(false);
+    $locationProvider.hashPrefix("!");
     $routeProvider.
       when('/about', {
         templateUrl: 'views/about.html',
@@ -88,3 +90,6 @@ angular.module('ShinixCMS', ['ngRoute','flash','ngAnimate','angularLoad','angula
         }
     }
 }])
+.run(function(amMoment,CMSCONFIG) {
+    amMoment.changeLocale(CMSCONFIG.language);
+});

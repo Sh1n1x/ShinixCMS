@@ -9,7 +9,8 @@
         "twbs/bootstrap":"v4.0.0-alpha",
         "intervention/image": "^2.3",
         "verot/class.upload.php": "dev-master",
-        "ircmaxell/password-compat": "^1.0"
+        "ircmaxell/password-compat": "^1.0",
+        "moment/moment": "^2.10"
     },
     "authors": [
         {
