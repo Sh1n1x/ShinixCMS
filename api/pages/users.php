@@ -1,7 +1,8 @@
 <?php
 
-$app->post('/users/check_session/:type', function($type) use ($app) {
-  $post = json_decode($app->request->getBody());
+$app->post('/users/check_session/:type', function($type) use ($app,$crypt) {
+  $post = $app->request->getBody();
+  $post = json_decode($crypt->decrypt($post));
   if(isset($post->username,$post->password,$post->level)){
     $pdo = getConnection();
     $stmt = $pdo->select(['id'])
@@ -30,7 +31,7 @@ $app->post('/users/check_session/:type', function($type) use ($app) {
   }
 });
 
-$app->post('/users/login', function() use ($app) {
+$app->post('/users/login', function() use ($app,$crypt) {
   $post = json_decode($app->request->getBody());
   if(isset($post->username,$post->password)){
     $pdo = getConnection();
@@ -43,8 +44,7 @@ $app->post('/users/login', function() use ($app) {
     //selection de l'utilisateur
     if (isset($login['id']) && password_verify($post->password, $login['password'])) {
       //check hash = password alors ok
-         /* Valid */
-         echo json_encode($login);
+		echo json_encode($crypt->encrypt(json_encode($login)));
      } else {
           $app->response->setStatus(300);
           echo '{"message":"error"}';

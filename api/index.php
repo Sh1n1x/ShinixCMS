@@ -18,16 +18,18 @@
   /**
   * INITIALISATION CONFIGURATION
   **/
-
-  $ImageManager = new ImageManager(array('driver' => 'gd'));
-  $parser = new Markdown;
-  $app = new \Slim\Slim();
-  $app->response->headers->set('Content-Type', 'application/json');
+	$ImageManager = new ImageManager(array('driver' => 'gd'));
+	$parser = new Markdown;
+	$encryptionKey = '6zp4y5vnUQI6dCASh46Fsasf09jl5Dmqa4NDcM1W421=';
+	$macKey = 'RJikK3QnUmqgQPXBwCSOs12hdOjks2s9321knfcQOTU=';
+	$crypt = new \PHPEncryptData\Simple($encryptionKey, $macKey);
+	$app = new \Slim\Slim();
+	$app->response->headers->set('Content-Type', 'application/json');
   
   /**
   *	LOAD DES CONFIGURATIONS
   **/
-  $app->get('/', function(){
+  $app->get('/', function(){	  
 	try {
 		$pdo = getConnection();
 		$selectStatement = $pdo->select()->from('an_settings');

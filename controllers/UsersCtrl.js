@@ -22,7 +22,7 @@ function($routeProvider) {
 					if($sessionStorage.users){
 						api.post('api/users/check_session/2',$sessionStorage.users).then(function() {
 						}, function errorCallback() {
-							$location.path('/blog');
+							$location.path('/users/logout');
 							Flash.create('error', "accès refusé",'alert-danger');
 						});
 					} else{

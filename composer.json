@@ -10,7 +10,8 @@
         "intervention/image": "^2.3",
         "verot/class.upload.php": "dev-master",
         "ircmaxell/password-compat": "^1.0",
-        "moment/moment": "^2.10"
+        "moment/moment": "^2.10",
+        "archwisp/php-encrypt-data": "^1.0"
     },
     "authors": [
         {

@@ -1,4 +1,7 @@
 <?php
+/**
+*	ENCODE UN TITRE SIMPLE EN URL
+**/
 function slugify($text){
   // replace non letter or digits by -
   $text = preg_replace('~[^\\pL\d]+~u', '-', $text);
@@ -15,6 +18,9 @@ function slugify($text){
   }
   return $text;
 }
+/**
+*	AFFICHE L'URL DU SITE ACTUEL
+**/
 function url(){
   return sprintf(
     "%s://%s%s",
@@ -23,3 +29,4 @@ function url(){
     $_SERVER['REQUEST_URI']
   );
 }
+
