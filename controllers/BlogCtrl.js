@@ -31,7 +31,7 @@ function($routeProvider) {
 							Flash.create('error', "Accès refusé",'alert-danger');
 						});
 					} else{
-						$location.path('/blog');
+						$location.path('/users/login');
 						Flash.create('error', "Accès refusé",'alert-danger');
 					}
 				}
@@ -112,94 +112,96 @@ function($routeProvider) {
 	});
 })
 .controller('AdminBlogEditCtrl', function AdminBlogEditCtrl($scope,$http,api,$routeParams,$window,Flash,angularLoad,FileUploader,CMSCONFIG) {
-	//UPLOAD Image
+	
+	$scope.blog = [];
 	$scope.uploader = new FileUploader();
-	$scope.uploader.url = 'api/blog/upload/'+$routeParams.id;
-	$scope.uploader.onAfterAddingFile = function() {
-		$scope.uploader.uploadAll();
-	};
-	$scope.uploader.onSuccessItem = function(item, response) {
-		//ON RECHARGE LES IMGS
+	api.getAll('api/blog/admin/edit/'+$routeParams.id).then(function(response) {
 		api.getAll('api/blog/img/'+$routeParams.id).then(function(response) {
 			$scope.image = response.data;
-		});
-	};
-	//load script
-	angularLoad.loadScript(CMSCONFIG.url+'lib/simplemde-markdown-editor/simplemde.min.js').then(function() {
-		// Script loaded succesfully.
-		// We can now start using the functions from someplugin.js
-		var simplemde = new SimpleMDE({
-			element: document.getElementById("inputcontent"),
-			autofocus: true,
-			lineWrapping: true,
-			autosave: {
-				enabled: true,
-				unique_id: 'blog_'+$routeParams.id,
-				delay: 1000,
-			},
-			initialValue: $routeParams.content,
-			parsingConfig: {
-				allowAtxHeaderWithoutSpace: true,
-				strikethrough: false,
-				underscoresBreakWords: true,
-			},
-			renderingConfig: {
-				singleLineBreaks: false,
-				codeSyntaxHighlighting: true,
-			},
-			tabSize: 4,
-			spellChecker:false, //il est que en anglais...
-			toolbar: [
-				"bold",
-				"italic",
-				"strikethrough",
-				"|",
-				"heading-1",
-				"heading-2",
-				"heading-3",
-				"|",
-				"code",
-				"quote",
-				"|",
-				"unordered-list",
-				"ordered-list",
-				"|",
-				"link",
-				"image",
-				"horizontal-rule",
-				"|",
-				"preview",
-				"side-by-side",
-				"fullscreen",
-				"|",
-				"guide"
-			]
-		});
-		angularLoad.loadCSS(CMSCONFIG.url+'lib/simplemde-markdown-editor/simplemde.min.css').then(function() {});
-		angularLoad.loadScript(CMSCONFIG.url+'lib/highlight.js/highlight.min.js').then(function() {
-			angularLoad.loadCSS(CMSCONFIG.url+'lib/highlight.js/github.min.css').then(function() {});
-		});
+			console.log($scope.image);
+		});		
+		$scope.blog = response.data;
+		//load script
+		angularLoad.loadScript(CMSCONFIG.url+'lib/simplemde-markdown-editor/simplemde.min.js').then(function() {
+			// Script loaded succesfully.
+			// We can now start using the functions from someplugin.js
+			var simplemde = new SimpleMDE({
+				element: document.getElementById("inputcontent"),
+				autofocus: true,
+				lineWrapping: true,
+				autosave: {
+					enabled: true,
+					unique_id: 'blog_'+$scope.blog.id,
+					delay: 1000,
+				},
+				initialValue: $scope.blog.content,
+				parsingConfig: {
+					allowAtxHeaderWithoutSpace: true,
+					strikethrough: false,
+					underscoresBreakWords: true,
+				},
+				renderingConfig: {
+					singleLineBreaks: false,
+					codeSyntaxHighlighting: true,
+				},
+				tabSize: 4,
+				spellChecker:false, //il est que en anglais...
+				toolbar: [
+					"bold",
+					"italic",
+					"strikethrough",
+					"|",
+					"heading-1",
+					"heading-2",
+					"heading-3",
+					"|",
+					"code",
+					"quote",
+					"|",
+					"unordered-list",
+					"ordered-list",
+					"|",
+					"link",
+					"image",
+					"horizontal-rule",
+					"|",
+					"preview",
+					"side-by-side",
+					"fullscreen",
+					"|",
+					"guide"
+				]
+			});
+			angularLoad.loadCSS(CMSCONFIG.url+'lib/simplemde-markdown-editor/simplemde.min.css').then(function() {});
+			angularLoad.loadScript(CMSCONFIG.url+'lib/highlight.js/highlight.min.js').then(function() {
+				angularLoad.loadCSS(CMSCONFIG.url+'lib/highlight.js/github.min.css').then(function() {});
+			});
 
-		//Save data (uniquement si l'éditeur markdown a chargé)
-		$scope.SubmitForm = function(){
-			$scope.blog.content= simplemde.value(); //on fout le contenu du Markdown editor
-			api.post('api/blog/admin/edit/'+$routeParams.id,$scope.blog).then(function(response) {
-				var message = '<strong>Succès !</strong> Article mis à jour avec succès';
-				Flash.create('success', message);
-				$window.location.href = '#!/admin/blog';
-			}, function errorCallback(response) {});
+			//Save data (uniquement si l'éditeur markdown a chargé)
+			$scope.SubmitForm = function(){
+				$scope.blog.content= simplemde.value(); //on fout le contenu du Markdown editor
+				api.post('api/blog/admin/edit/'+$routeParams.id,$scope.blog).then(function(response) {
+					var message = '<strong>Succès !</strong> Article mis à jour avec succès';
+					Flash.create('success', message);
+					$window.location.href = '#!/admin/blog';
+				}, function errorCallback(response) {});
+			};
+		});		
+		//UPLOAD Image
+		$scope.uploader.url = 'api/blog/upload/'+$routeParams.id;
+		$scope.uploader.onAfterAddingFile = function() {
+			$scope.uploader.uploadAll();
 		};
+		$scope.uploader.onSuccessItem = function(item, response) {
+			//ON RECHARGE LES IMGS
+			api.getAll('api/blog/img/'+$routeParams.id).then(function(response) {
+				$scope.image = response.data;
+				console.log(response.data);
+			});
+		};
+	}, function errorCallback(response) {
+		$window.location.href = '#!/admin/blog';
+		var message = '<strong>Erreur !</strong> Article introuvable';
+		Flash.create('error', message,'alert-danger');
 	});
-
-		$scope.blog = [];
-		api.getAll('api/blog/admin/edit/'+$routeParams.id).then(function(response) {
-			$scope.blog = response.data;
-		}, function errorCallback(response) {
-			$window.location.href = '#!/admin/blog';
-			var message = '<strong>Erreur !</strong> Article introuvable';
-			Flash.create('error', message,'alert-danger');
-		});
-		api.getAll('api/blog/img/'+$routeParams.id).then(function(response) {
-			$scope.image = response.data;
-		});
 });

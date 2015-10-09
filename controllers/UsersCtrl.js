@@ -4,7 +4,15 @@ function($routeProvider) {
 	$routeProvider.
   		when('/users/register', {
   			templateUrl: 'views/users/register.html',
-  			controller: 'UsersRegisterCtrl'
+  			controller: 'UsersRegisterCtrl',
+			resolve:{
+				"check":function($location,Flash,$sessionStorage){
+					if($sessionStorage.users){
+						$location.path('/blog');
+						Flash.create('error', "Vous ne pouvez pas vous inscrire et être connecté en même temps.",'alert-info');
+					}
+				}
+			}
   		}).
   		when('/users/login', {
   			templateUrl: 'views/users/login.html',
@@ -23,11 +31,11 @@ function($routeProvider) {
 						api.post('api/users/check_session/2',$sessionStorage.users).then(function() {
 						}, function errorCallback() {
 							$location.path('/users/logout');
-							Flash.create('error', "accès refusé",'alert-danger');
+							Flash.create('error', "Accès refusé",'alert-danger');
 						});
 					} else{
 						$location.path('/blog');
-						Flash.create('error', "accès refusé",'alert-danger');
+						Flash.create('error', "Accès refusé",'alert-danger');
 					}
 				}
 			}
