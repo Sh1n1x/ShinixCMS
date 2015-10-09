@@ -5,12 +5,13 @@
 		<title><?=TITLE ?></title>
     <link rel="stylesheet" href="<?=url() ?>vendor/twbs/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="<?=url() ?>lib/angular-flash/angular-flash.min.css" />
+    <link rel="stylesheet" href="<?=url() ?>templates/default/css/style.css" />
 	<meta name="fragment" content="!">
-    <style>body{font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;;font-weight:300;}h1,h2{font-weight:300;}</style>
 	</head>
 	<body ng-app="ShinixCMS">	
     <div class="container">
-		<nav class="navbar navbar-inverse">
+		<nav class="navbar navbar-inverse topbar">
+		<div class="container">
 		  <a class="navbar-brand" href="#!/"><?=TITLE ?></a>
 		  <ul class="nav nav-pills">
 			<li class="nav-item active">
@@ -29,6 +30,7 @@
 			  <a class="nav-link" href="#!/admin/blog">Admin blog</a>
 			</li>
 		  </ul>
+		</div>
 		</nav>
 		<div class="row">
 			<div class="col-md-3">Salut</div>
@@ -37,6 +39,8 @@
 				<div ng-view="">Chargement</div>
 			</div>
 		</div>
+		<hr />
+		<?=TITLE ?> copyright 2015
     </div>
 		<script src="<?=url() ?>vendor/components/angular.js/angular.min.js"></script>
 		<script src="<?=url() ?>vendor/components/angular.js/angular-route.js"></script>
