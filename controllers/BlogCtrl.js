@@ -80,21 +80,13 @@ function($routeProvider) {
 **/
 
 .controller('BlogCtrl', function BlogCtrl($scope,api,$routeParams) {
+	var img_size = "800x200";
 	//SLIDER
 	$scope.myInterval = 5000;
 	$scope.noWrapSlides = false;
-	var slides = $scope.slides = [];
-	$scope.addSlide = function() {
-		var newWidth = 600 + slides.length + 1;
-		slides.push({
-		  image: '//placekitten.com/' + newWidth + '/300',
-		  text: ['More','Extra','Lots of','Surplus'][slides.length % 4] + ' ' +
-			['Cats', 'Kittys', 'Felines', 'Cutes'][slides.length % 4]
-		});
-	};
-	for (var i=0; i<4; i++) {
-	$scope.addSlide();
-	}
+	api.getAll('api/blog/slider/'+img_size).then(function(r) {
+		$scope.slides = r.data;
+	}, function(r) { });
 	//END SLIDER
 	
 	if($routeParams.page){
@@ -102,7 +94,6 @@ function($routeProvider) {
 	} else {
 		$scope.cpage = 1;
 	}
-	var img_size = "800x200";
 	$scope.pagination = [];
 	api.getAll('api/blog/'+img_size+'/'+$scope.cpage).then(function(r) {
 		$scope.blog_item = r.data.data;

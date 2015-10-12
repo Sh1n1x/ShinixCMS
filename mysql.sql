@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1:8889
--- Généré le :  Lun 05 Octobre 2015 à 17:08
+-- Généré le :  Lun 12 Octobre 2015 à 16:28
 -- Version du serveur :  5.6.15-log
--- Version de PHP :  5.6.0beta2
+-- Version de PHP :  5.5.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS `an_blog` (
   `created` datetime NOT NULL,
   `online` tinyint(1) NOT NULL,
   `img_id` int(11) NOT NULL,
+  `slider` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `slug` (`slug`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
@@ -42,10 +43,10 @@ CREATE TABLE IF NOT EXISTS `an_blog` (
 -- Contenu de la table `an_blog`
 --
 
-INSERT INTO `an_blog` (`id`, `title`, `slug`, `content`, `created`, `online`, `img_id`) VALUES
-(1, 'Saluut', 'saluut', '## Salut les coucouilles !\n![](http://localhost:8888/uploads/blog/2015/10/test2.jpg)\n\nJ''espère que ça marche la fonction autosave (local seulement ^^).\n\nOn va voir à 22h35................\njjjjj\nkkkj\n**kjkj**\nfasf\nsafafasfa\nfsfaf\nsffa\n\nasfafff\nfasa\n\n```\nvar example = "hello!";\nalert(example);\n```\n\nfsafa\nfsasf\nfasfa\nfsf\nafsfa\nsffsa\n\nfaafa\n...\n... >.<\nHi Ho Hu\nGluuuuuuuteeeeen\nBege', '0000-00-00 00:00:00', 1, 4),
-(2, 'test d''un article2', 'test-d-un-article2', 'voici un article de test\nsfsfa\nsafasf\n\nsafsaf', '0000-00-00 00:00:00', 1, 0),
-(3, 'test 2 ou pas ?', 'test-2-ou-pas', 'fsafafa', '2015-10-04 10:48:39', 1, 0);
+INSERT INTO `an_blog` (`id`, `title`, `slug`, `content`, `created`, `online`, `img_id`, `slider`) VALUES
+(1, 'Saluut', 'saluut', '## Salut les coucouilles !\n![](http://localhost/ShinixCMS/uploads/blog/2015/10/bg_200x200.jpg)\n\nJ''espère que ça marche la fonction autosave (local seulement ^^).\n\nOn va voir à 22h35................\njjjjj\nkkkj\n**kjkj**\nfasf\nsafafasfa\nfsfaf\nsffa\n\nasfafff\nfasa\n\n```\nvar example = "hello!";\nalert(example);\n```\n\nfsafa\nfsasf\nfasfa\nfsf\nafsfa\nsffsa\n\nfaafa\n...\n... >.<\nHi Ho Hu\nGluuuuuuuteeeeen\nBege', '0000-00-00 00:00:00', 1, 1, 1),
+(2, 'test d''un article2', 'test-d-un-article2', 'voici un article de test\nsfsfa\nsafasf\n\nsafsaf', '0000-00-00 00:00:00', 1, 0, 0),
+(3, 'test 2 ou pas ?', 'test-2-ou-pas', 'fsafafa', '2015-10-04 10:48:39', 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -73,17 +74,14 @@ CREATE TABLE IF NOT EXISTS `an_medias` (
   `module` varchar(20) NOT NULL,
   `ref_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- Contenu de la table `an_medias`
 --
 
 INSERT INTO `an_medias` (`id`, `name`, `file`, `module`, `ref_id`) VALUES
-(1, 'test2', 'blog/2015/10/test2.jpg', 'blog', 1),
-(4, 'avatar', 'blog/2015/10/avatar.jpg', 'blog', 1),
-(3, 'bg', 'blog/2015/10/bg.jpg', 'blog', 1),
-(5, 'test3', 'blog/2015/10/test3.jpg', 'blog', 1);
+(1, 'bg', 'blog/2015/10/bg.jpg', 'blog', 1);
 
 -- --------------------------------------------------------
 
