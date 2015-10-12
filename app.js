@@ -1,4 +1,4 @@
-angular.module('ShinixCMS', ['ngRoute','flash','ngAnimate','angularLoad','angularFileUpload','validation.match','ngStorage','angularMoment'])
+angular.module('ShinixCMS', ['ngRoute','ui.bootstrap','flash','ngAnimate','angularLoad','angularFileUpload','validation.match','ngStorage','angularMoment'])
   .config(['$routeProvider','$locationProvider',
   function($routeProvider,$locationProvider) {
 	$locationProvider.html5Mode(false);
