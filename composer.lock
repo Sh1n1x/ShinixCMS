@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6f584310fb2c203753c066180ec75e44",
-    "content-hash": "ca1699f1b1995c5beead42fce3cd62d3",
+    "hash": "107554457c25f749700437ae9ae2fd8e",
+    "content-hash": "44516e26b4efc8175643713423155123",
     "packages": [
         {
             "name": "archwisp/php-encrypt-data",
@@ -799,16 +799,16 @@
         },
         {
             "name": "slim/pdo",
-            "version": "1.8.0",
+            "version": "1.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FaaPz/Slim-PDO.git",
-                "reference": "e2aa1dd0a57aa0739e01ef9219c5f8001ec9bb01"
+                "reference": "a0c263288ef3bb31601b1107313008577d4c8449"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FaaPz/Slim-PDO/zipball/e2aa1dd0a57aa0739e01ef9219c5f8001ec9bb01",
-                "reference": "e2aa1dd0a57aa0739e01ef9219c5f8001ec9bb01",
+                "url": "https://api.github.com/repos/FaaPz/Slim-PDO/zipball/a0c263288ef3bb31601b1107313008577d4c8449",
+                "reference": "a0c263288ef3bb31601b1107313008577d4c8449",
                 "shasum": ""
             },
             "require": {
@@ -821,7 +821,7 @@
                     "Slim\\PDO\\": "src/PDO/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "notification-url": "http://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -841,7 +841,7 @@
                 "pdo",
                 "slim"
             ],
-            "time": "2015-09-14 14:30:00"
+            "time": "2015-10-07 11:51:15"
         },
         {
             "name": "slim/slim",
@@ -939,57 +939,6 @@
             "time": "2015-09-19 19:59:23"
         },
         {
-            "name": "twbs/bootstrap",
-            "version": "v4.0.0-alpha",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "980d8ea2d828fe1796a423f80d84d526b0252a89"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/980d8ea2d828fe1796a423f80d84d526b0252a89",
-                "reference": "980d8ea2d828fe1796a423f80d84d526b0252a89",
-                "shasum": ""
-            },
-            "replace": {
-                "twitter/bootstrap": "self.version"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.3.x-dev"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jacob Thornton",
-                    "email": "jacobthornton@gmail.com"
-                },
-                {
-                    "name": "Mark Otto",
-                    "email": "markdotto@gmail.com"
-                }
-            ],
-            "description": "The most popular front-end framework for developing responsive, mobile first projects on the web.",
-            "homepage": "http://getbootstrap.com",
-            "keywords": [
-                "JS",
-                "css",
-                "framework",
-                "front-end",
-                "mobile-first",
-                "responsive",
-                "sass",
-                "web"
-            ],
-            "time": "2015-08-19 07:07:59"
-        },
-        {
             "name": "verot/class.upload.php",
             "version": "dev-master",
             "source": {
@@ -1035,7 +984,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "twbs/bootstrap": 15,
         "verot/class.upload.php": 20
     },
     "prefer-stable": false,

@@ -6,7 +6,6 @@
         "components/angular.js": "1.3.16",
         "michelf/php-markdown": "1.5.0",
         "slim/pdo":"~1.8",
-        "twbs/bootstrap":"v4.0.0-alpha",
         "intervention/image": "^2.3",
         "verot/class.upload.php": "dev-master",
         "ircmaxell/password-compat": "^1.0",
