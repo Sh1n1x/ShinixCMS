@@ -1,3 +1,20 @@
+#admin_template{
+	position:fixed;
+	left:0;
+	right:0;
+	top:0;
+	overflow:auto;
+	bottom:0;
+	background:#fff;
+	z-index:1000;
+	width:100%;
+}
+#admin_template  .menu{
+	background:#354052;
+	height:100%;
+	color:#fff;
+}
+
 body{
 	font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-weight:300;
@@ -30,10 +47,19 @@ h1,h2{
 	border-radius:0;
 	margin:0;
 }
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus {
+	background:transparent;
+	text-decoration:underline;
+}
 
 .nav-pills .nav-link{
-	line-height: 35px;
+	line-height:44px;
+	background:transparent;
 	color:#fff;
+}
+.nav>li>a:hover, .nav>li>a:focus {
+	background:transparent;
+	text-decoration:underline;
 }
 #header{
 	background:#1e1e1e;
@@ -47,5 +73,11 @@ h1,h2{
 }
 #bg_home{
 	background:#f2f2f2;
-	height:300px;
+	height:350px;
+}
+#bg_home .carousel{
+	height: 350px;
+}
+#bg_home .carousel img{
+	height: 350px;
 }

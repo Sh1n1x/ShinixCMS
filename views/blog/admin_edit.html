@@ -1,35 +1,48 @@
-<div class="container">
-	<h1>Editer</h1>
+<div id="admin_template">
+	<div class="container-fluid">
 	<div class="row">
-		<div class="col-md-10">
-			<form name="article_edit" ng-submit="SubmitForm()">
-			  <div class="form-group">
-				<label for="inputtitle">Titre</label>
-				<input type="text" class="form-control" id="inputtitle" ng-model="blog.title" required>
-			  </div>
-				<div class="form-group">
-				  <label for="inputtitle">Article en ligne ?</label>
-					<select class="form-control" ng-model="blog.online">
-						<option value="0">Non</option>
-						<option value="1">Oui</option>
-						<option value="9">Brouillon</option>
-					</select>
-				</div>
-				<div class="form-group">
-				  <label for="inputcontent">Contenu</label>
-				  <textarea ng-model="blog.content" id="inputcontent" class="form-control" addImgToTextarea=""></textarea>
-				</div>
-			  <button type="submit" class="btn btn-default">Submit</button>
-			</form>
+		<div class="col-md-2 menu">
+			<ul>
+				<li>Administration</li>
+				<li><a href="#!/">Retour au site</a></li>
+				<li><a href="#!/admin/blog">Gestion du blog</a></li>
+			</ul>
 		</div>
-		<div class="col-md-2">
-			<h3>Images</h3>
-			<input type="file" nv-file-select="{ disabled: true }" uploader="uploader"/><br/>
-			<div class="block-img">
-				<div ng-repeat="img in image" style="margin:5px;">
-					<img ng-src="uploads/{{img.file}}" style="max-width:100px;" alt="" />
+		<div class="col-md-10">
+			<h1>Editer</h1>
+			<div class="row">
+				<div class="col-md-10">
+					<form name="article_edit" ng-submit="SubmitForm()">
+					  <div class="form-group">
+						<label for="inputtitle">Titre</label>
+						<input type="text" class="form-control" id="inputtitle" ng-model="blog.title" required>
+					  </div>
+						<div class="form-group">
+						  <label for="inputtitle">Article en ligne ?</label>
+							<select class="form-control" ng-model="blog.online">
+								<option value="0">Non</option>
+								<option value="1">Oui</option>
+								<option value="9">Brouillon</option>
+							</select>
+						</div>
+						<div class="form-group">
+						  <label for="inputcontent">Contenu</label>
+						  <textarea ng-model="blog.content" id="inputcontent" class="form-control" addImgToTextarea=""></textarea>
+						</div>
+					  <button type="submit" class="btn btn-default">Submit</button>
+					</form>
+				</div>
+				<div class="col-md-2">
+					<h3>Images</h3>
+					<input type="file" nv-file-select="{ disabled: true }" uploader="uploader"/><br/>
+					<div class="block-img">
+						<div ng-repeat="img in image" style="margin:5px;">
+							<img ng-src="uploads/{{img.file}}" style="max-width:100px;" alt="" />
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 </div>
