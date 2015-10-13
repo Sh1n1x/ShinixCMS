@@ -48,7 +48,7 @@ $app->get('/blog/admin', function () {
 $app->get('/blog/admin/edit/:id', function ($id) use($app) {
   $id = intval($id);
   $pdo = getConnection();
-  $sct = $pdo->select(['id,title,content,online'])->from('an_blog')->where('id','=',$id);
+  $sct = $pdo->select(['id,title,content,slider,online'])->from('an_blog')->where('id','=',$id);
   $stmt = $sct->execute();
   $data = $stmt->fetch();
   if(isset($data['id'])){
@@ -60,9 +60,9 @@ $app->get('/blog/admin/edit/:id', function ($id) use($app) {
 $app->post('/blog/admin/edit/:id', function ($id) use ($app) {
   $post = json_decode($app->request->getBody());
   $id = intval($id);
-  if(isset($post->title,$post->content,$post->online,$id) && is_numeric($id)){
+  if(isset($post->title,$post->content,$post->online,$post->slider,$id) && is_numeric($id)){
     $pdo = getConnection();
-    $sct = $pdo->update(['title'=>$post->title,'slug'=>slugify($post->title),'content'=>$post->content,'online'=>$post->online])
+    $sct = $pdo->update(['title'=>$post->title,'slug'=>slugify($post->title),'content'=>$post->content,'online'=>intval($post->online),'slider'=>intval($post->slider)])
                ->table('an_blog')
                ->where('id','=',$id);
     $stmt = $sct->execute();

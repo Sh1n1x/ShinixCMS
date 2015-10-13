@@ -26,6 +26,13 @@
 							</select>
 						</div>
 						<div class="form-group">
+						  <label for="inputtitle">Afficher sur le slider ?</label>
+							<select class="form-control" ng-model="blog.slider">
+								<option value="0">Non</option>
+								<option value="1">Oui</option>
+							</select>
+						</div>
+						<div class="form-group">
 						  <label for="inputcontent">Contenu</label>
 						  <textarea ng-model="blog.content" id="inputcontent" class="form-control" addImgToTextarea=""></textarea>
 						</div>
